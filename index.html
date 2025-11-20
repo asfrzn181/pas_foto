@@ -3,612 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galery Atma Luhur</title>
+    <title>AL GALERI</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
     <style>
-        :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --success-color: #10b981;
-            --danger-color: #ef4444;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Gaya Dasar */
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background-color: #f4f7fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 20px 0;
         }
-
-        .main-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            margin: 20px auto;
-            max-width: 1400px;
-        }
-
         .header-section {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 3px solid #e5e7eb;
-        }
-
-        .header-section h1 {
-            font-size: 3em;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .header-section p {
-            color: #6b7280;
-            font-size: 1.1em;
-        }
-
-        .form-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .form-card label {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
             color: white;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            padding: 30px 0;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
         }
-
-        .form-control {
+        h2 {
+            font-weight: 700;
+        }
+        /* Gaya Form Input */
+        #image-form {
+            background-color: white;
+            padding: 25px;
             border-radius: 10px;
-            border: 2px solid transparent;
-            padding: 12px 15px;
-            font-size: 1em;
-            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-top: -50px;
+            position: relative;
         }
-
-        .form-control:focus {
-            border-color: #8b5cf6;
-            box-shadow: 0 0 0 0.2rem rgba(139, 92, 246, 0.25);
+        .form-control, .btn-primary {
+            border-radius: 8px;
         }
-
-        .btn-generate {
-            background: white;
-            color: #667eea;
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        /* Gaya Kartu Gambar */
+        .image-card {
             border: none;
             border-radius: 10px;
-            padding: 15px 40px;
-            font-size: 1.1em;
-            font-weight: 700;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-generate:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            background: #f9fafb;
-        }
-
-        .btn-generate:active {
-            transform: translateY(-1px);
-        }
-
-        .stats-bar {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            color: white;
-            display: none;
-            animation: slideDown 0.5s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .stats-bar.show {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2em;
-            font-weight: 800;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            opacity: 0.9;
-        }
-
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .loading-overlay.active {
-            display: flex;
-        }
-
-        .loading-content {
-            text-align: center;
-            color: white;
-        }
-
-        .spinner {
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-top: 5px solid white;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .image-card {
-            position: relative;
-            border-radius: 15px;
             overflow: hidden;
-            background: white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            opacity: 0;
-            animation: fadeIn 0.5s forwards;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            height: 100%;
         }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
         .image-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-
         .image-wrapper {
-            position: relative;
             width: 100%;
-            padding-bottom: 100%;
-            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            height: 250px;
             overflow: hidden;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
         .image-wrapper img {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.3s;
-            opacity: 0;
+            /* Placeholder sebelum dimuat */
+            background-color: #e9ecef; 
         }
-
-        .image-wrapper img.loaded {
+        .image-card:hover img {
+            transform: scale(1.05);
+        }
+        /* Lazy Load CSS */
+        img.lazy {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        img.lazy.loaded {
             opacity: 1;
         }
-
-        .image-card:hover img {
-            transform: scale(1.1);
-        }
-
-        .image-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            color: white;
-            padding: 15px;
-            transform: translateY(100%);
-            transition: transform 0.3s;
-        }
-
-        .image-card:hover .image-overlay {
-            transform: translateY(0);
-        }
-
-        .image-id {
-            font-weight: 700;
-            font-size: 1.1em;
-            margin-bottom: 5px;
-        }
-
-        .image-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .btn-action {
-            flex: 1;
-            padding: 8px;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 0.85em;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
+        /* Style untuk informasi gambar */
+        .image-info {
+            padding: 10px;
+            font-size: 0.85rem;
             text-align: center;
+            word-break: break-all;
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
         }
-
-        .btn-view {
-            background: #3b82f6;
-        }
-
-        .btn-view:hover {
-            background: #2563eb;
-            color: white;
-        }
-
-        .btn-download {
-            background: #10b981;
-        }
-
-        .btn-download:hover {
-            background: #059669;
-            color: white;
-        }
-
-        .loading-placeholder {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #9ca3af;
-            font-size: 2em;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            color: #6b7280;
-        }
-
-        .no-results i {
-            font-size: 4em;
-            margin-bottom: 20px;
-            color: #d1d5db;
-        }
-
-        .filter-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .view-toggle {
-            display: flex;
-            gap: 10px;
-        }
-
-        .view-btn {
-            padding: 10px 20px;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .view-btn.active {
-            background: #667eea;
-            color: white;
-        }
-
-        .image-grid.grid-view {
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        }
-
-        .image-grid.list-view {
-            grid-template-columns: 1fr;
-        }
-
-        .list-view .image-wrapper {
-            padding-bottom: 40%;
-        }
-
-        @media (max-width: 768px) {
-            .main-container {
-                padding: 20px;
+        /* Responsiveness: Ubah layout grid untuk layar kecil */
+        @media (max-width: 767px) {
+            .col-md-3 {
+                flex: 0 0 50%; /* 2 kolom di layar kecil */
+                max-width: 50%;
             }
-
-            .header-section h1 {
-                font-size: 2em;
-            }
-
-            .image-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 15px;
-            }
-
-            .stats-bar {
-                flex-direction: column;
+            .image-wrapper {
+                height: 180px;
             }
         }
     </style>
 </head>
 <body>
 
-<div class="container-fluid">
-    <div class="main-container">
-        <div class="header-section">
-            <h1><i class="fas fa-images"></i> TAKE ME OUT</h1>
-            <p>Galeri Foto Mahasiswa Universitas Atma Luhur</p>
-        </div>
-
-        <div class="form-card">
-            <form id="image-form">
-                <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <label for="angkatan"><i class="fas fa-calendar-alt"></i> Angkatan</label>
-                        <select id="angkatan" name="angkatan" class="form-control">
-                            <script>
-                                for (let i = 10; i <= 30; i++) {
-                                    let year = "20" + i;
-                                    let selected = i === 19 ? 'selected' : '';
-                                    document.write(`<option value="${i}" ${selected}>${year}</option>`);
-                                }
-                            </script>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="jurusan"><i class="fas fa-graduation-cap"></i> Jurusan</label>
-                        <select id="jurusan" name="jurusan" class="form-control">
-                            <option value="11">Teknik Informatika</option>
-                            <option value="22">Sistem Informasi</option>
-                            <option value="77">Bisnis Digital</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="tipe"><i class="fas fa-user-graduate"></i> Tipe</label>
-                        <select id="tipe" name="tipe" class="form-control">
-                            <option value="50">Reguler</option>
-                            <option value="52">Non-Reguler</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="text-center mt-3">
-                    <button type="submit" class="btn-generate">
-                        <i class="fas fa-search"></i> Generate Images
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <div id="stats-bar" class="stats-bar">
-            <div class="stat-item">
-                <span class="stat-number" id="total-count">0</span>
-                <span class="stat-label">Total Gambar</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" id="loaded-count">0</span>
-                <span class="stat-label">Berhasil Dimuat</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" id="failed-count">0</span>
-                <span class="stat-label">Gagal Dimuat</span>
-            </div>
-        </div>
-
-        <div class="filter-controls" id="filter-controls" style="display: none;">
-            <div class="view-toggle">
-                <button class="view-btn active" onclick="setView('grid')">
-                    <i class="fas fa-th"></i> Grid
-                </button>
-                <button class="view-btn" onclick="setView('list')">
-                    <i class="fas fa-list"></i> List
-                </button>
-            </div>
-        </div>
-
-        <div class="image-grid grid-view" id="image-container"></div>
+<div class="header-section">
+    <div class="container text-center">
+        <h2><i class="fas fa-camera-retro"></i> TAKE ME OUT | Koleksi Gambar</h2>
+        <p class="lead">Cari dan tampilkan foto mahasiswa berdasarkan kriteria.</p>
     </div>
 </div>
 
-<div class="loading-overlay" id="loading-overlay">
-    <div class="loading-content">
-        <div class="spinner"></div>
-        <h3>Memuat gambar...</h3>
-        <p>Mohon tunggu sebentar</p>
+<div class="container">
+    <form id="image-form" class="mb-5">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="angkatan"><i class="fas fa-calendar-alt"></i> Angkatan (Tahun Masuk)</label>
+                <select id="angkatan" name="angkatan" class="form-control">
+                    <script>
+                        // Generate Tahun 2010 hingga 2030
+                        for (let i = 10; i <= 30; i++) {
+                            let year = "20" + i;
+                            let val = i.toString().padStart(2, '0');
+                            document.write(`<option value="${val}">${year}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="jurusan"><i class="fas fa-book"></i> Jurusan</label>
+                <select id="jurusan" name="jurusan" class="form-control">
+                    <option value="11">Teknik Informatika</option>
+                    <option value="22">Sistem Informasi</option>
+                    <option value="77">Bisnis Digital</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="tipe"><i class="fas fa-user-graduate"></i> Tipe Perkuliahan</label>
+                <select id="tipe" name="tipe" class="form-control">
+                    <option value="50">Reguler</option>
+                    <option value="52">Non-Reguler</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-search"></i> Cari & Generate Images</button>
+    </form>
+
+    <div class="row" id="image-container">
+        </div>
+
+    <div class="text-center my-5 d-none" id="loading-spinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <p class="mt-2 text-muted">Memuat gambar. Mohon tunggu sebentar...</p>
     </div>
+    
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
-    let loadedCount = 0;
-    let failedCount = 0;
-    let totalCount = 0;
+    let observer = null;
 
     document.getElementById('image-form').addEventListener('submit', function(e) {
         e.preventDefault();
         generateImages();
     });
 
+    // --- FUNGSI UTAMA UNTUK MENG-GENERATE GAMBAR ---
     function generateImages() {
         const angkatan = document.getElementById('angkatan').value;
         const jurusan = document.getElementById('jurusan').value;
         const tipe = document.getElementById('tipe').value;
         const totalImages = 300;
-        const baseUrl = "https://mahasiswa.atmaluhur.ac.id/foto/";
+        // Ganti URL ini jika URL sumber gambar berbeda
+        const baseUrl = "https://mahasiswa.atmaluhur.ac.id/foto/"; 
         const imageContainer = document.getElementById('image-container');
-        const loadingOverlay = document.getElementById('loading-overlay');
-        const statsBar = document.getElementById('stats-bar');
-        const filterControls = document.getElementById('filter-controls');
+        const spinner = document.getElementById('loading-spinner');
+        
+        // Hapus observer lama jika ada
+        if (observer) {
+            observer.disconnect();
+        }
 
         imageContainer.innerHTML = '';
-        loadedCount = 0;
-        failedCount = 0;
-        totalCount = 0;
+        spinner.classList.remove('d-none'); // Tampilkan spinner saat memuat
 
-        loadingOverlay.classList.add('active');
-        statsBar.classList.remove('show');
-        filterControls.style.display = 'none';
+        let htmlContent = '';
 
-        setTimeout(() => {
-            for (let i = 1; i <= totalImages; i++) {
-                const formattedNum = i.toString().padStart(4, '0');
-                const studentId = `${angkatan}${jurusan}${tipe}${formattedNum}`;
-                const imageUrl = `${baseUrl}${studentId}.jpg`;
+        for (let i = 1; i <= totalImages; i++) {
+            const formattedNum = i.toString().padStart(4, '0');
+            // Format URL: [angkatan][jurusan][tipe][formattedNum].jpg
+            const imageUrl = `${baseUrl}${angkatan}${jurusan}${tipe}${formattedNum}.jpg`; 
+            const nim = `${angkatan}${jurusan}${tipe}${formattedNum}`;
 
-                if (imageUrl !== `${baseUrl}1922500056.jpg`) {
-                    totalCount++;
-                    createImageCard(imageUrl, studentId);
-                }
-            }
-
-            updateStats();
-            loadingOverlay.classList.remove('active');
-            statsBar.classList.add('show');
-            filterControls.style.display = 'flex';
-            lazyLoad();
-        }, 500);
-    }
-
-    function createImageCard(imageUrl, studentId) {
-        const imageContainer = document.getElementById('image-container');
-        const card = document.createElement('div');
-        card.className = 'image-card';
-        card.style.animationDelay = `${Math.random() * 0.3}s`;
-
-        card.innerHTML = `
-            <div class="image-wrapper">
-                <div class="loading-placeholder">
-                    <i class="fas fa-spinner fa-spin"></i>
-                </div>
-                <img data-src="${imageUrl}" class="lazy" alt="${studentId}">
-                <div class="image-overlay">
-                    <div class="image-id">${studentId}</div>
-                    <div class="image-actions">
-                        <a href="${imageUrl}" target="_blank" class="btn-action btn-view">
-                            <i class="fas fa-eye"></i> Lihat
-                        </a>
-                        <a href="${imageUrl}" download class="btn-action btn-download">
-                            <i class="fas fa-download"></i> Download
-                        </a>
+            // Pengecualian URL (dibiarkan sesuai kode asli)
+            if (imageUrl !== `${baseUrl}1922500056.jpg`) { 
+                htmlContent += `
+                    <div class="col-6 col-sm-4 col-md-3 mb-4">
+                        <div class="card image-card">
+                            <div class="image-wrapper">
+                                <img data-src="${imageUrl}" class="lazy" alt="Foto Mahasiswa ${nim}">
+                            </div>
+                            <div class="image-info">
+                                <i class="fas fa-id-card"></i> ${nim}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        `;
-
-        imageContainer.appendChild(card);
-    }
-
-    function lazyLoad() {
-        const lazyImages = document.querySelectorAll('img.lazy:not(.loaded):not(.error)');
-        
-        lazyImages.forEach(img => {
-            if (img.getBoundingClientRect().top < window.innerHeight + 500) {
-                const imageSrc = img.dataset.src;
-                const card = img.closest('.image-card');
-                const placeholder = card.querySelector('.loading-placeholder');
-                
-                const image = new Image();
-                image.src = imageSrc;
-                
-                image.onload = function() {
-                    img.src = imageSrc;
-                    img.classList.add('loaded');
-                    img.classList.remove('lazy');
-                    if (placeholder) placeholder.remove();
-                    loadedCount++;
-                    updateStats();
-                };
-                
-                image.onerror = function() {
-                    img.classList.add('error');
-                    img.classList.remove('lazy');
-                    card.style.display = 'none';
-                    failedCount++;
-                    updateStats();
-                };
+                `;
             }
-        });
+        }
+
+        imageContainer.innerHTML = htmlContent;
+        spinner.classList.add('d-none'); // Sembunyikan spinner setelah generate DOM
+
+        // Panggil Intersection Observer baru
+        lazyLoadObserver();
     }
 
-    function updateStats() {
-        document.getElementById('total-count').textContent = totalCount;
-        document.getElementById('loaded-count').textContent = loadedCount;
-        document.getElementById('failed-count').textContent = failedCount;
+    // --- FUNGSI LAZY LOADING DENGAN INTERSECTION OBSERVER ---
+    function lazyLoadObserver() {
+        const lazyImages = document.querySelectorAll('img.lazy');
+
+        if ('IntersectionObserver' in window) {
+            observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    // Jika gambar sudah masuk ke dalam viewport
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const src = img.dataset.src;
+
+                        if (!src) return; 
+
+                        // Muat gambar menggunakan objek Image baru untuk cek status load
+                        const imageLoader = new Image();
+                        imageLoader.src = src;
+
+                        imageLoader.onload = function() {
+                            // Jika sukses dimuat, pindahkan src
+                            img.src = src;
+                            img.classList.add('loaded'); // Tampilkan gambar
+                            
+                            observer.unobserve(img); 
+                        };
+                        
+                        imageLoader.onerror = function() {
+                            // Jika gagal (404/error), sembunyikan seluruh kartu agar tidak terlihat kosong
+                            const cardDiv = img.closest('.col-6, .col-sm-4, .col-md-3');
+                            if (cardDiv) {
+                                cardDiv.style.display = 'none';
+                            }
+                            observer.unobserve(img);
+                        };
+                    }
+                });
+            }, {
+                // Memuat gambar 200px sebelum masuk viewport
+                rootMargin: '0px 0px 200px 0px' 
+            });
+
+            // Mulai mengamati semua gambar
+            lazyImages.forEach(img => {
+                observer.observe(img);
+            });
+        } 
     }
 
-    function setView(viewType) {
-        const container = document.getElementById('image-container');
-        const buttons = document.querySelectorAll('.view-btn');
-        
-        buttons.forEach(btn => btn.classList.remove('active'));
-        event.target.closest('.view-btn').classList.add('active');
-        
-        container.className = `image-grid ${viewType}-view`;
-    }
-
-    window.addEventListener('scroll', lazyLoad);
-    window.addEventListener('resize', lazyLoad);
+    // Panggil generateImages() saat halaman dimuat pertama kali
+    window.addEventListener('load', generateImages);
 </script>
 </body>
 </html>
