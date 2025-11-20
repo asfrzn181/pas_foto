@@ -1,70 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Collection</title>
-    <!-- Bootstrap CSS -->
+    <title>📸 Koleksi Gambar Mahasiswa</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Lazy Load CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        /* Gaya Dasar */
+        body {
+            background-color: #f4f7fa; /* Warna latar belakang terang */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .header-section {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%); /* Biru gradien yang menarik */
+            color: white;
+            padding: 30px 0;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-weight: 700;
+        }
+        /* Gaya Form Input */
+        #image-form {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-top: -50px; /* Diangkat sedikit ke atas untuk overlay visual */
+            position: relative;
+        }
+        .form-control, .btn-primary {
+            border-radius: 8px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        /* Gaya Kartu Gambar */
+        .image-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            height: 100%; /* Memastikan semua kartu memiliki tinggi yang sama */
+        }
+        .image-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .image-wrapper {
+            width: 100%;
+            height: 250px; /* Tinggi tetap untuk gambar */
+            overflow: hidden;
+            background-color: #e9ecef; /* Placeholder abu-abu */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Memastikan gambar menutupi area tanpa terdistorsi */
+            transition: transform 0.3s;
+        }
+        .image-card:hover img {
+            transform: scale(1.05);
+        }
+        /* Lazy Load CSS (Diperbaiki) */
         img.lazy {
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.5s ease-in-out;
         }
         img.lazy.loaded {
             opacity: 1;
+        }
+        /* Style untuk informasi gambar (opsional, jika ingin menampilkan data) */
+        .image-info {
+            padding: 10px;
+            font-size: 0.85rem;
+            text-align: center;
+            word-break: break-all;
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
+        /* Responsiveness: Ubah layout grid untuk layar kecil */
+        @media (max-width: 767px) {
+            .col-md-3 {
+                flex: 0 0 50%; /* 2 kolom di layar kecil */
+                max-width: 50%;
+            }
+            .image-wrapper {
+                height: 180px;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4">TAKE ME OUT</h2>
-    <form id="image-form" class="mb-4">
+<div class="header-section">
+    <div class="container text-center">
+        <h2><i class="fas fa-camera-retro"></i> TAKE ME OUT | Koleksi Gambar</h2>
+        <p class="lead">Cari dan tampilkan foto mahasiswa berdasarkan kriteria.</p>
+    </div>
+</div>
+
+<div class="container">
+    <form id="image-form" class="mb-5">
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="angkatan">Angkatan</label>
+                <label for="angkatan"><i class="fas fa-calendar-alt"></i> Angkatan (Tahun Masuk)</label>
                 <select id="angkatan" name="angkatan" class="form-control">
                     <script>
+                        // Generate Tahun 2010 hingga 2030
                         for (let i = 10; i <= 30; i++) {
                             let year = "20" + i;
-                            document.write(`<option value="${i}">${year}</option>`);
+                            let val = i.toString().padStart(2, '0');
+                            document.write(`<option value="${val}">${year}</option>`);
                         }
                     </script>
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="jurusan">Jurusan</label>
+                <label for="jurusan"><i class="fas fa-book"></i> Jurusan</label>
                 <select id="jurusan" name="jurusan" class="form-control">
                     <option value="11">Teknik Informatika</option>
                     <option value="22">Sistem Informasi</option>
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="tipe">Tipe</label>
+                <label for="tipe"><i class="fas fa-user-graduate"></i> Tipe Perkuliahan</label>
                 <select id="tipe" name="tipe" class="form-control">
                     <option value="50">Reguler</option>
                     <option value="52">Non-Reguler</option>
                 </select>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Generate Images</button>
+        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-search"></i> Cari & Generate Images</button>
     </form>
 
-    <div class="row" id="image-container"></div>
+    <div class="row" id="image-container">
+        </div>
+
+    <div class="text-center my-5 d-none" id="loading-spinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <p class="mt-2 text-muted">Memuat gambar. Mohon tunggu sebentar...</p>
+    </div>
+    
 </div>
 
-<!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- Lazy Load JS -->
 <script>
     document.getElementById('image-form').addEventListener('submit', function(e) {
         e.preventDefault();
         generateImages();
     });
+
+    // Intersection Observer untuk Lazy Loading modern
+    let observer = null;
 
     function generateImages() {
         const angkatan = document.getElementById('angkatan').value;
@@ -73,47 +179,95 @@
         const totalImages = 300;
         const baseUrl = "https://mahasiswa.atmaluhur.ac.id/foto/";
         const imageContainer = document.getElementById('image-container');
+        const spinner = document.getElementById('loading-spinner');
+        
+        // Hapus observer lama jika ada
+        if (observer) {
+            observer.disconnect();
+        }
+
         imageContainer.innerHTML = '';
+        spinner.classList.remove('d-none'); // Tampilkan spinner saat memuat
+
+        let htmlContent = '';
 
         for (let i = 1; i <= totalImages; i++) {
             const formattedNum = i.toString().padStart(4, '0');
             const imageUrl = `${baseUrl}${angkatan}${jurusan}${tipe}${formattedNum}.jpg`;
+            const nim = `${angkatan}${jurusan}${tipe}${formattedNum}`; // Contoh NIM
 
+            // Cek pengecualian URL (dibiarkan sesuai kode asli)
             if (imageUrl !== `${baseUrl}1922500056.jpg`) {
-                const div = document.createElement('div');
-                div.className = 'col-md-3 mb-4';
-                
-                const img = document.createElement('img');
-                img.dataset.src = imageUrl;
-                img.className = 'img-fluid img-thumbnail lazy';
-                img.alt = 'Image';
-                div.appendChild(img);
-                
-                imageContainer.appendChild(div);
+                htmlContent += `
+                    <div class="col-6 col-sm-4 col-md-3 mb-4">
+                        <div class="card image-card">
+                            <div class="image-wrapper">
+                                <img data-src="${imageUrl}" class="lazy" alt="Foto Mahasiswa ${nim}">
+                            </div>
+                            <div class="image-info">
+                                <i class="fas fa-id-card"></i> ${nim}
+                            </div>
+                        </div>
+                    </div>
+                `;
             }
         }
 
-        lazyLoad();
+        imageContainer.innerHTML = htmlContent;
+        spinner.classList.add('d-none'); // Sembunyikan spinner setelah selesai generate DOM
+
+        // Inisialisasi Intersection Observer baru
+        lazyLoadObserver();
     }
 
-    function lazyLoad() {
+    function lazyLoadObserver() {
         const lazyImages = document.querySelectorAll('img.lazy');
-        lazyImages.forEach(img => {
-            if (img.getBoundingClientRect().top < window.innerHeight && img.dataset.src) {
-                const image = new Image();
-                image.src = img.dataset.src;
-                image.onload = function() {
-                    img.src = img.dataset.src;
-                    img.classList.add('loaded');
-                };
-                image.onerror = function() {
-                    img.parentElement.style.display = 'none';
-                };
-            }
-        });
+
+        if ('IntersectionObserver' in window) {
+            observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const src = img.dataset.src;
+
+                        // Gunakan objek Image untuk cek error sebelum ditampilkan
+                        const imageLoader = new Image();
+                        imageLoader.src = src;
+
+                        imageLoader.onload = function() {
+                            img.src = src;
+                            img.classList.add('loaded');
+                            observer.unobserve(img); // Berhenti mengamati setelah dimuat
+                        };
+                        
+                        imageLoader.onerror = function() {
+                            // Sembunyikan kartu jika gambar tidak ditemukan/error
+                            const cardDiv = img.closest('.col-6, .col-sm-4, .col-md-3');
+                            if (cardDiv) {
+                                cardDiv.style.display = 'none';
+                            }
+                            observer.unobserve(img);
+                        };
+                    }
+                });
+            }, {
+                rootMargin: '0px 0px 200px 0px' // Muat gambar 200px sebelum masuk viewport
+            });
+
+            lazyImages.forEach(img => {
+                observer.observe(img);
+            });
+        } else {
+            // Fallback untuk browser lama (tetap menggunakan window.scroll jika perlu)
+            console.log("Intersection Observer tidak didukung. Menggunakan fallback.");
+            // Anda dapat memanggil fungsi lazyLoad() yang lama di sini sebagai fallback jika diperlukan
+        }
     }
 
-    window.addEventListener('scroll', lazyLoad);
+    // Panggil generateImages() saat halaman dimuat untuk menampilkan default
+    // generateImages(); 
+
+    // Tidak perlu lagi window.addEventListener('scroll', lazyLoad) karena menggunakan IO
 </script>
 </body>
 </html>
